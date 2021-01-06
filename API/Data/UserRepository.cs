@@ -31,6 +31,8 @@ namespace API.Data
         //     }).SingleOrDefaultAsync();
         // }
 
+       
+
         public async Task<memberDto> GetMemberAsync(string username)
         {
             return await _context.Users
@@ -45,6 +47,7 @@ namespace API.Data
            .ProjectTo<memberDto>(_mapper.ConfigurationProvider)
            .ToListAsync ();
         }
+        
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
