@@ -5,12 +5,12 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { ServerErrorComponent } from './server-error/server-error.component';
+import { NotFoundComponent } from './Errors/not-found/not-found.component';
+import { ServerErrorComponent } from './Errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
   {path:'',component :HomeComponent},
