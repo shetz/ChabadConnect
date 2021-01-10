@@ -12,6 +12,8 @@ using AutoMapper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using API.Extentions;
+using API.Helpers;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -34,12 +36,19 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<memberDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams )
         {
-            //  return await _context.Users.ToListAsync();
-            //  var users = await _userRepository.GetUsersAsync();
-            // var usersToReturn = _maper.Map< IEnumerable<memberDto >>(users);
-            var usersToReturn = await _userRepository.GetMembersAsync();
+           var user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
+           userParams.CurrentUsername = User.GetUserName();
+
+           if(string.IsNullOrEmpty (userParams.Gender))
+             userParams.Gender= user.Gender =="male"? "female": "male";
+
+            var usersToReturn = await _userRepository.GetMembersAsync(userParams);
+            
+            Response.AddPaginationHeader(usersToReturn.CurrentPage, usersToReturn.PageSize,
+             usersToReturn.TotalCount,usersToReturn.TotalPages);
+            
             return Ok(usersToReturn);
 
         }
@@ -48,7 +57,7 @@ namespace API.Controllers
         [Authorize]
         //  [HttpGet("{id}")]
         [HttpGet("{username}", Name = "GetUser")]
-        public async Task<ActionResult<memberDto>> GetUser(string username)//(int id)
+        public async Task<ActionResult<MemberDto>> GetUser(string username)//(int id)
         {
             //in comment is tyhe evolution of this action:
             //return await _context.Users.FindAsync(id);

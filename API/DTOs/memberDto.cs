@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace API.DTOs
 {
-    public class memberDto
+    public class MemberDto
     {
         public int Id { get; set; }
 
