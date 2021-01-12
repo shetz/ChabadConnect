@@ -45,9 +45,9 @@ export class MembersService {
     this.userParams = userParams;
   }
 
-  resetUserParams(){
+  resetUserParams() {
     this.userParams = new UserParams(this.user);
-    return this.userParams;;
+    return this.userParams;
   }
 
   getMembers(userParams: UserParams) {
@@ -85,6 +85,19 @@ export class MembersService {
         this.memberCache.set(key, response);
         return response;
       })
+    );
+  }
+
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + 'likes/' + username, {});
+  }
+
+  getLikes(predicate: string, pageNumber, pageSize) {
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return this.getPaginatedResult<Partial<Member[]>>(
+      this.baseUrl + 'likes',
+      params
     );
   }
 

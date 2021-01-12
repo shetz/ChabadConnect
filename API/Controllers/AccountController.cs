@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Security.Cryptography;
 using API.DTOs;
-using API.interfaces;
+using API.Interfaces;
 using AutoMapper;
 
 namespace API.Controllers

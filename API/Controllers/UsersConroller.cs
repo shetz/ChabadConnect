@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using API.interfaces;
+using API.Interfaces;
 using API.DTOs;
 using AutoMapper;
 using System.Security.Claims;

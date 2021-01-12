@@ -1,4 +1,4 @@
-using API.interfaces;
+using API.Interfaces;
 using API.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using API.Extentions;
 
@@ -6,9 +7,9 @@ namespace API.Entities
 {
     public class AppUser
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
-        public string UserName{ get; set; }
+        public string UserName { get; set; }
 
         public byte[] PasswordHash { get; set; }
 
@@ -18,9 +19,9 @@ namespace API.Entities
 
         public string KnownAs { get; set; }
 
-        public DateTime Created { get; set; }= DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.Now;
 
-        public DateTime LastActive { get; set; }= DateTime.Now;
+        public DateTime LastActive { get; set; } = DateTime.Now;
 
         public string Gender { get; set; }
 
@@ -41,6 +42,9 @@ namespace API.Entities
         //     return DateOfBirth.CalculateAge();
         // }
 
-        
+        public ICollection<UserLike> LikedByUsers { get; set; }
+
+        public ICollection<UserLike> LikedUsers { get; set; }
+
     }
 }
