@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using API.Extentions;
+using API.Extensions;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,12 +19,12 @@ namespace API.Helpers
 
             //var username= resultContext.HttpContext.User.GetUserName();
             
-            var repo = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
-            var user = await repo.GetUserByIdAsync(userId);
+            var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            var user = await uow.UserRepository.GetUserByIdAsync(userId);
             //var user = await repo.GetUserByUsernameAsync(username);
             
             user.LastActive = DateTime.Now;
-            await repo.SaveAllAsync();
+            await uow.Complete();
         }
     }
 }
